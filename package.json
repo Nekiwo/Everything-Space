@@ -3,16 +3,21 @@
     "devDependencies": {
         "browserify": "^17.0.0",
         "copyfiles": "latest",
-        "typescript": "^4.2.2"
+        "ts-loader": "^8.0.18",
+        "typescript": "^4.2.3",
+        "webpack": "^5.25.1",
+        "webpack-cli": "^4.5.0"
     },
     "scripts": {
-        "build": "tsc src/ts/index --out build/index.js --target  ESNext --removeComments true --module amd --types \"three\" --moduleResolution node  && copyfiles -f src/index.html build",
+        "buildOLD": "tsc src/ts/index --outDir build/ --target ESNext --removeComments true --module esnext && copyfiles -f src/index.html build",
+        "build": "npx webpack && copyfiles -f src/index.html build",
         "test": "npm run build && node testserver.js"
     },
     "dependencies": {
         "@types/three": "^0.126.0",
         "amd": "0.0.0",
         "express": "^4.17.1",
-        "three": "^0.126.1"
+        "three": "^0.126.1",
+        "typings": "^2.1.1"
     }
 }

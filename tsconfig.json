@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "outDir": "./build/",
+        "module": "esnext",
+        "target": "ESNext",
+        "allowJs": true,
+        "removeComments": true
+    }
+}

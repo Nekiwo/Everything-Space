@@ -1,6 +1,5 @@
 // NOTE: All functions with more than 1 argument are using one JSON tree as one argument so its easier to understand and see what items are used
 
-
 // importing classes and etc.
 import * as THREE from "three";
 
@@ -14,7 +13,7 @@ import {planets} from "./data/Planets";
 
 
 
-
+console.log(1)
 
 // Making a three js scene
 var CamPos: CamOrigin = new CamOrigin()
@@ -34,9 +33,10 @@ camera.position.z = -5
 const animate = function () {
     requestAnimationFrame(animate);
 
-    console.log(1)
+    console.log(2)
 
     renderer.render(scene, camera);
 };
 
 animate();
+console.log(3)
