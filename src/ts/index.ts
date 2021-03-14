@@ -2,6 +2,8 @@
 
 
 // importing classes and etc.
+import * as THREE from "three";
+
 import {Planet} from "./classes/Planet";
 import {CamOrigin} from "./classes/CamOrigin";
 
@@ -10,7 +12,6 @@ import {CalcTime} from "./functions/CalcTime";
 
 import {planets} from "./data/Planets";
 
-import * as THREE from "three";
 
 
 
@@ -28,11 +29,12 @@ document.body.appendChild(renderer.domElement);
 planets.forEach((planet: Planet) => {
     planet.DrawPlanet();
 });
-    camera.position.z = -5
+camera.position.z = -5
 
 const animate = function () {
     requestAnimationFrame(animate);
 
+    console.log(1)
 
     renderer.render(scene, camera);
 };
