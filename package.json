@@ -6,7 +6,8 @@
         "typescript": "^4.2.2"
     },
     "scripts": {
-        "build": "tsc src/ts/index --out build/index.js --target  ESNext --removeComments true --module amd --types \"three\" && copyfiles -f src/index.html build"
+        "build": "tsc src/ts/index --out build/index.js --target  ESNext --removeComments true --module amd --types \"three\" --moduleResolution node  && copyfiles -f src/index.html build",
+        "test": "npm run build && node testserver.js"
     },
     "dependencies": {
         "@types/three": "^0.126.0",
