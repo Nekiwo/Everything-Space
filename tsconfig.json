@@ -1,9 +1,10 @@
 {
     "compilerOptions": {
         "outDir": "./build/",
-        "module": "esnext",
+        "module": "commonjs",
         "target": "ESNext",
         "allowJs": true,
-        "removeComments": true
+        "removeComments": true,
+        "types": ["three"]
     }
 }
