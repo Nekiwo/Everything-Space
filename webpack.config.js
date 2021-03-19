@@ -5,11 +5,15 @@ module.exports = {
   node: {
     __dirname: false,
   },
+  devServer: {
+    inline: false
+  },
   module: {
-    rules: [
+    loader: [
       {
         test: /\.tsx?$/,
-        use: "ts-loader"
+        exclude: /node_modules/,
+        loader: "awesome-typescript-loader"
       }
     ],
   },
