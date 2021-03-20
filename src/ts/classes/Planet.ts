@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import {scene} from "../index";
+import {AddObj} from "../index";
 
 // Planet class for each planet
 
@@ -77,7 +77,7 @@ export class Planet {
         let geometry: THREE.TorusGeometry = new THREE.TorusGeometry(this.XRadius);
         let material: THREE.MeshBasicMaterial = new THREE.MeshBasicMaterial({color: 0xfff});
         let circum: THREE.Mesh = new THREE.Mesh(geometry, material);
-        scene.add(circum);
+        AddObj(circum);
 
     }
     RemovePlanet: Function = () => {

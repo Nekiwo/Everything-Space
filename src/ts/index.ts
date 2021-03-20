@@ -12,7 +12,6 @@ import {CalcTime} from "./functions/CalcTime";
 import {planets} from "./data/Planets";
 
 
-
 console.log(1)
 
 // Making a three js scene
@@ -39,4 +38,9 @@ const animate = function () {
 };
 
 animate();
+
+export var AddObj: Function = (mesh: THREE.Mesh) => {
+    scene.add(mesh);
+}
+
 console.log(3)

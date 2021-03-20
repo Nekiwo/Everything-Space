@@ -8,8 +8,9 @@ module.exports = {
   devServer: {
     inline: false
   },
+  mode: "development",
   module: {
-    loader: [
+    rules: [
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
