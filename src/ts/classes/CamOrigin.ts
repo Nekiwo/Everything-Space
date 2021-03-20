@@ -3,20 +3,18 @@ export class CamOrigin {
     x: number = 0;
     y: number = 0;
     z: number = 0;
-    euler: {
-        x: number;
-        y: number;
-        z: number;
-    }
+    eulerX: number;
+    eulerY: number;
+    eulerZ: number;
     constructor(args?: any) {
-        this.euler.x = 0;
-        this.euler.y = 0;
-        this.euler.z = 0;
+        this.eulerX = 0;
+        this.eulerY = 0;
+        this.eulerZ = 0;
     }
     pos: Function = (vector: string, value: number) => {
         this[vector] = value;
     }
     angle: Function = (vector: string, value: number) => {
-        this.euler[vector] = value;
+        this["euler" + vector.toUpperCase()] = value;
     }
 }
