@@ -1,5 +1,4 @@
 import * as THREE from "three";
-import {AddObj} from "../index";
 
 // Planet class for each planet
 
@@ -41,12 +40,8 @@ export class Planet {
         
         this.x = this.XRadius * Math.cos((this.SunDeg - 90) * (Math.PI/180));
         this.z = this.ZRadius * Math.sin((this.SunDeg - 90) * (Math.PI/180));
-
-
-        // draw first frame
-        this.DrawPlanet(this.SunDeg);
     }
-    DrawPlanet: Function = (SunDeg: number = this.SunDeg) => {
+    DrawPlanet: Function = (SunDeg: number = this.SunDeg, scene: THREE.Scene) => {
         this.SunDeg = SunDeg;
         
         // Draw each planet and path on a canvas element for purely testing/showcase purposes
@@ -74,11 +69,10 @@ export class Planet {
         planet.fill();
         */
 
-        let geometry: THREE.TorusGeometry = new THREE.TorusGeometry(this.XRadius);
+        let geometry: THREE.TorusGeometry = new THREE.TorusGeometry(this.XRadius * 8, 0.05, 6, 32, );
         let material: THREE.MeshBasicMaterial = new THREE.MeshBasicMaterial({color: 0xfff});
         let circum: THREE.Mesh = new THREE.Mesh(geometry, material);
-        AddObj(circum);
-
+        scene.add(circum);
     }
     RemovePlanet: Function = () => {
         // remove planet from the scene
