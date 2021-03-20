@@ -2,21 +2,16 @@
 
 // importing classes and etc.
 import * as THREE from "three";
+import {OrbitControls} from "three-orbitcontrols-ts";
 
 import {Planet} from "./classes/Planet";
-import {CamOrigin} from "./classes/CamOrigin";
 
 import {DrawPath} from "./functions/DrawPath";
 import {CalcTime} from "./functions/CalcTime";
 
 import {planets} from "./data/Planets";
 
-
-console.log(1)
-
 // Making a three js scene
-var CamPos: CamOrigin = new CamOrigin()
-
 export const scene:THREE.Scene = new THREE.Scene();
 const camera:THREE.PerspectiveCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
@@ -25,22 +20,31 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 planets.forEach((planet: Planet) => {
-    planet.DrawPlanet();
+    console.log(planet.name);
+    planet.DrawPlanet(planet.SunDeg, scene);
 });
-camera.position.z = -5
+
+const controls: OrbitControls = new OrbitControls(camera, renderer.domElement);
+camera.position.set(0, 0, 0);
+controls.update();
+
+document.addEventListener( 'mousewheel', (event: WheelEvent) => {
+    camera.position.z += event.deltaY;
+    console.log(event.deltaY);
+    //camera.fov = Math.max( Math.min( camera.fov, fovMAX ), fovMIN );
+    //camera.projectionMatrix = new THREE.Matrix4().makePerspective(camera.fov, window.innerWidth / window.innerHeight, camera.near, camera.far);
+});
 
 const animate = function () {
     requestAnimationFrame(animate);
 
-    console.log(2)
+    
 
+    controls.update();
     renderer.render(scene, camera);
 };
 
 animate();
 
-export var AddObj: Function = (mesh: THREE.Mesh) => {
-    scene.add(mesh);
-}
 
 console.log(3)
