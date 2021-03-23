@@ -12,7 +12,7 @@
     "scripts": {
         "buildOLD": "tsc src/ts/index --outDir build/ --target ESNext --removeComments true --module esnext && copyfiles -f src/index.html build",
         "start": "node testserver.js",
-        "build": "npx webpack && copyfiles -f src/index.html build"
+        "build": "npx webpack && copyfiles -f src/index.html build && npm run start"
     },
     "dependencies": {
         "awesome-typescript-loader": "^5.2.1",
