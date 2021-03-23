@@ -74,6 +74,10 @@ export class Planet {
         var geometry: THREE.TorusGeometry = new THREE.TorusGeometry(this.XRadius * 24, 0.05, 6, (GraphicsLevel + 1) * 12);
         var material: THREE.MeshBasicMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF, side: THREE.FrontSide, transparent: true, opacity: 0.3});
         var circum: THREE.Mesh = new THREE.Mesh(geometry, material);
+
+        circum.scale.set(1, this.ZRadius / this.XRadius, 1);
+        circum.rotation.set(this.XTilt * (Math.PI / 2), this.ZTilt * (Math.PI / 2), 0);
+
         scene.add(circum);
     }
     RemovePlanet: Function = () => {
