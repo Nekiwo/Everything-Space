@@ -1,4 +1,6 @@
 import * as THREE from "three";
+import {GraphicsLevel} from "../index";
+
 
 // Planet class for each planet
 
@@ -69,9 +71,9 @@ export class Planet {
         planet.fill();
         */
 
-        let geometry: THREE.TorusGeometry = new THREE.TorusGeometry(this.XRadius * 8, 0.05, 6, 32, );
-        let material: THREE.MeshBasicMaterial = new THREE.MeshBasicMaterial({color: 0xfff});
-        let circum: THREE.Mesh = new THREE.Mesh(geometry, material);
+        var geometry: THREE.TorusGeometry = new THREE.TorusGeometry(this.XRadius * 24, 0.05, 6, (GraphicsLevel + 1) * 12);
+        var material: THREE.MeshBasicMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF, side: THREE.FrontSide, transparent: true, opacity: 0.3});
+        var circum: THREE.Mesh = new THREE.Mesh(geometry, material);
         scene.add(circum);
     }
     RemovePlanet: Function = () => {
