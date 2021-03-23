@@ -13,7 +13,7 @@ import {planets} from "./data/Planets";
 // Global variables
 
 // Level of graphics from 1-3, changed based on the device's performance
-export var GraphicsLevel: number = 1;
+export var GraphicsLevel: number = 3;
 
 
 // Making a three js scene
@@ -32,7 +32,6 @@ window.addEventListener("resize", () => {
 });
 
 planets.forEach((planet: Planet) => {
-    console.log(planet.name);
     planet.DrawPlanet(planet.SunDeg, scene);
 });
 
@@ -70,6 +69,3 @@ const animate = function () {
 };
 
 animate();
-
-
-console.log(3)
