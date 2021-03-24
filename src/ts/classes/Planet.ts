@@ -16,10 +16,8 @@ export class Planet {
     SunDeg: number;
     x: number;
     z: number;
-    // XRadius of ellipse, AKA Perihelion of the orbit
-    XRadius: number;
-    // ZRadius of ellipse, AKA Aphelion of the orbit
-    ZRadius: number;
+    XRadius: number; // XRadius of ellipse, AKA Perihelion of the orbit
+    ZRadius: number; // ZRadius of ellipse, AKA Aphelion of the orbit
     XTilt: number;
     ZTilt: number;
     apoapsis: number;
@@ -30,11 +28,10 @@ export class Planet {
         this.mass = args.mass;
         this.model = args.model;
         this.SunDeg = args.SunDeg;
-        
         this.XRadius = args.XRadius;
         this.ZRadius = args.ZRadius;
-        this.XTilt = args.XTilt;
-        this.ZTilt = args.ZTilt;
+        this.XTilt = args.XTilt; // XTilt is argument of periapsis in this context
+        this.ZTilt = args.ZTilt; // ZTilt is longitude of the ascending node in this context
         this.apoapsis = args.apoapsis;
         this.inclination = args.inclination;
         // Calculate the coords for the ellipse instead of circle
@@ -76,7 +73,7 @@ export class Planet {
         var circum: THREE.Mesh = new THREE.Mesh(geometry, material);
 
         circum.scale.set(1, this.ZRadius / this.XRadius, 1);
-        circum.rotation.set(this.XTilt * (Math.PI / 2), this.ZTilt * (Math.PI / 2), 0);
+        circum.rotation.set(this.XTilt * (Math.PI / 180), 0, this.ZTilt * (Math.PI / 180));
 
         scene.add(circum);
     }
