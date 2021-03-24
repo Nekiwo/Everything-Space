@@ -137,4 +137,6 @@ export var planets:Planet[] = [
     })
 ];
 // SOURCE: https://nssdc.gsfc.nasa.gov/planetary/factsheet/
+// https://en.wikipedia.org/wiki/Longitude_of_the_ascending_node
+// https://en.wikipedia.org/wiki/Argument_of_periapsis
 // https://solarsystem.nasa.gov/planets/overview/
