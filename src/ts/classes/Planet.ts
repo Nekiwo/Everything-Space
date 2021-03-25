@@ -50,8 +50,8 @@ export class Planet {
         // If you want to change the way planets are rendered, you can do it here
 
         // Calculate the coords for the ellipse instead of circle and draw new
-        var NewX: number = this.XRadius * Math.cos((SunDeg - 90) * (Math.PI/180));
-        var NewZ: number = this.aphelion * Math.sin((SunDeg - 90) * (Math.PI/180));
+        var NewX: number = this.XRadius * 24 * Math.cos((SunDeg - 90) * (Math.PI/180));
+        var NewZ: number = this.ZRadius * 48 * Math.sin((SunDeg - 90) * (Math.PI/180));
         this.x = NewX;
         this.z = NewZ;
 
@@ -70,26 +70,33 @@ export class Planet {
         planet.fill();
         */
 
+
+        // Testing Planets, models coming soon
+        var PlanetGeometry: THREE.SphereGeometry = new THREE.SphereGeometry(this.radius * 24000000, 20, 16);
+        var PlanetMaterial: THREE.MeshBasicMaterial = new THREE.MeshBasicMaterial({color: 0x0000FF, side: THREE.FrontSide});
+        var planet: THREE.Mesh = new THREE.Mesh(PlanetGeometry, PlanetMaterial);
+
+        planet.position.set(NewX, NewZ, 0);
+
+        // Testing orbit, better version coming soon
         var CircumGeometry: THREE.TorusGeometry = new THREE.TorusGeometry(this.XRadius * 24, 0.05, 6, (GraphicsLevel + 1) * 12);
         var CircumMaterial: THREE.MeshBasicMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF, side: THREE.FrontSide, transparent: true, opacity: 0.3});
         var circum: THREE.Mesh = new THREE.Mesh(CircumGeometry, CircumMaterial);
 
         // I might've messed up here, do a pull request or sumbit an issue on the GitHub repo if you know the right way to rotate the orbits
         circum.scale.set(1, this.ZRadius * 2 / this.XRadius, 1);
-        circum.rotation.set(this.XTilt * (Math.PI / 180), 0, this.LocalTilt * (Math.PI / 180));
-        circum.rotateOnWorldAxis(new THREE.Vector3(0, 0, 1), this.ZTilt * (Math.PI / 180));
-        circum.translateZ(this.XRadius - this.aphelion);
-        console.log(this.XRadius - this.aphelion);
-    
-        // Testong Planets, models coming soon
-        var PlanetGeometry: THREE.SphereGeometry = new THREE.SphereGeometry(this.radius * 24, 20, 16);
-        var PlanetMaterial: THREE.MeshBasicMaterial = new THREE.MeshBasicMaterial({color: 0x0000FF, side: THREE.FrontSide});
-        var planet: THREE.Mesh = new THREE.Mesh(PlanetGeometry, PlanetMaterial);
 
-        planet.position.set(0, 0, 0);
+        var group: THREE.Object3D = new THREE.Object3D();
+        group.add(planet);
+        group.add(circum);
 
-        scene.add(circum);
-        scene.add(planet);
+        group.rotation.set(this.XTilt * (Math.PI / 180), 0, this.LocalTilt * (Math.PI / 180));
+        group.children[0].rotation.set(this.XTilt * (Math.PI / 180), 0, this.SunDeg - (this.LocalTilt * (Math.PI / 180)));
+        group.rotateOnWorldAxis(new THREE.Vector3(0, 0, 1), this.ZTilt * (Math.PI / 180));
+        group.children[0].rotateOnWorldAxis(new THREE.Vector3(0, 0, 1), this.SunDeg - (this.ZTilt * (Math.PI / 180)));
+        group.translateZ(this.XRadius - this.aphelion);
+
+        scene.add(group);
     }
     RemovePlanet: Function = () => {
         // remove planet from the scene
