@@ -86,17 +86,14 @@ export class Planet {
         // I might've messed up here, do a pull request or sumbit an issue on the GitHub repo if you know the right way to rotate the orbits
         circum.scale.set(1, this.ZRadius * 2 / this.XRadius, 1);
 
-        var group: THREE.Object3D = new THREE.Object3D();
-        group.add(planet);
-        group.add(circum);
+        circum.rotation.set(this.XTilt * (Math.PI / 180), 0, this.LocalTilt * (Math.PI / 180));
+        planet.rotation.set(this.XTilt * (Math.PI / 180), 0, this.SunDeg - (this.LocalTilt * (Math.PI / 180)));
+        circum.rotateOnWorldAxis(new THREE.Vector3(0, 0, 1), this.ZTilt * (Math.PI / 180));
+        planet.rotateOnAxis(new THREE.Vector3(0, 0, 1), this.SunDeg - (this.ZTilt * (Math.PI / 180)));
+        circum.translateZ(this.XRadius - this.aphelion);
 
-        group.rotation.set(this.XTilt * (Math.PI / 180), 0, this.LocalTilt * (Math.PI / 180));
-        group.children[0].rotation.set(this.XTilt * (Math.PI / 180), 0, this.SunDeg - (this.LocalTilt * (Math.PI / 180)));
-        group.rotateOnWorldAxis(new THREE.Vector3(0, 0, 1), this.ZTilt * (Math.PI / 180));
-        group.children[0].rotateOnWorldAxis(new THREE.Vector3(0, 0, 1), this.SunDeg - (this.ZTilt * (Math.PI / 180)));
-        group.translateZ(this.XRadius - this.aphelion);
-
-        scene.add(group);
+        scene.add(circum);
+        scene.add(planet);
     }
     RemovePlanet: Function = () => {
         // remove planet from the scene
