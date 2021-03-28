@@ -49,7 +49,7 @@ camera.position.copy(FocusPos);
 camera.translateZ(CamZoom);
 
 document.addEventListener("mousewheel", (event: WheelEvent) => {
-    if (CamZoom > 4) {
+    if (CamZoom > 7) {
         camera.position.copy(FocusPos);
         CamZoom += event.deltaY / 25;
         camera.translateZ(CamZoom);
