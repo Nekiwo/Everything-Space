@@ -1,5 +1,7 @@
 import * as THREE from "three";
+import {MeshLine, MeshLineMaterial, MeshLineRaycast} from "three.meshline";
 import {GraphicsLevel} from "../index";
+import {CalcOrbitPoint} from "../functions/CalcOrbitPoint";
 
 
 // Planet class for each planet
@@ -79,8 +81,18 @@ export class Planet {
         planet.position.set(NewX, NewZ, 0);
 
         // Testing orbit, better version coming soon
-        var CircumGeometry: THREE.TorusGeometry = new THREE.TorusGeometry(this.XRadius * 24, 0.05, 6, (GraphicsLevel + 1) * 12);
-        var CircumMaterial: THREE.MeshBasicMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF, side: THREE.FrontSide, transparent: true, opacity: 0.3});
+        var CircumGeometry: any = new MeshLine();
+
+        // Having to calculate points manually as this is a meshline
+        var CircumPoints: Array<number> = [];
+        for (let i = 0; i <= (GraphicsLevel + 1) * 96; i++) {
+            let x = this.XRadius * 24 * Math.cos((i * 2 * Math.PI) / ((GraphicsLevel + 1) * 12));
+            let y = this.XRadius * 24 * -Math.sin((i * 2*  Math.PI) / ((GraphicsLevel + 1) * 12));
+            CircumPoints.push(x, y, 0);
+        }
+        CircumGeometry.setPoints(CircumPoints, p => 1 - Math.sqrt(p) * 2.5);
+
+        var CircumMaterial: any = new MeshLineMaterial({color: new THREE.Color(0xFFFFFF), sizeAttenuation: false, lineWidth: 0.003});
         var circum: THREE.Mesh = new THREE.Mesh(CircumGeometry, CircumMaterial);
 
         // I might've messed up here, do a pull request or sumbit an issue on the GitHub repo if you know the right way to rotate the orbits
