@@ -24,7 +24,7 @@ export class Planet {
     LocalTilt: number; // LocalTilt is argument of periapsis in this context
     inclination: number;
     XRadius: number;
-    ZRadius: number;
+    YRadius: number;
     constructor(args?: any) {
         this.name = args.name;
         this.radius = args.radius;
@@ -32,7 +32,7 @@ export class Planet {
         this.model = args.model;
         this.SunDeg = args.SunDeg;
         this.XRadius = args.XRadius;
-        this.ZRadius = args.ZRadius;
+        this.YRadius = args.YRadius;
         this.aphelion = args.aphelion;
         this.XTilt = args.XTilt;
         this.ZTilt = args.ZTilt;
@@ -53,7 +53,7 @@ export class Planet {
 
         // Calculate the coords for the ellipse instead of circle and draw new
         var NewX: number = this.XRadius * 24 * Math.cos((SunDeg - 90) * (Math.PI/180));
-        var NewZ: number = this.ZRadius * 48 * Math.sin((SunDeg - 90) * (Math.PI/180));
+        var NewZ: number = this.YRadius * 48 * Math.sin((SunDeg - 90) * (Math.PI/180));
         this.x = NewX;
         this.z = NewZ;
 
@@ -96,7 +96,8 @@ export class Planet {
         var circum: THREE.Mesh = new THREE.Mesh(CircumGeometry, CircumMaterial);
 
         // I might've messed up here, do a pull request or sumbit an issue on the GitHub repo if you know the right way to rotate the orbits
-        circum.scale.set(1, this.ZRadius * 2 / this.XRadius, 1);
+        // All this math is very spaghetti ._.
+        circum.scale.set(1, this.YRadius * 2 / this.XRadius, 1);
 
         circum.rotation.set(this.XTilt * (Math.PI / 180), 0, this.LocalTilt * (Math.PI / 180));
         circum.rotateOnWorldAxis(new THREE.Vector3(0, 0, 1), this.ZTilt * (Math.PI / 180));
