@@ -4,7 +4,7 @@ export var CalcOrbitPoint: Function = (args: any) => {
     // calculate y axis view of new ellipse
     var ZViewXRadius = 0;
     var ZViewYRadius = 0;
-    var ZViewZAngle = 0;
+    var ZViewZAngle = args.LocalTilt * (Math.PI / 180) +  args.ZTilt * (Math.PI / 180);
     var x = 0;
     var y = 0;
     // calculate z axis view of new ellipse
