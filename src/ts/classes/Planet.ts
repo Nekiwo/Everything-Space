@@ -99,9 +99,7 @@ export class Planet {
         circum.scale.set(1, this.ZRadius * 2 / this.XRadius, 1);
 
         circum.rotation.set(this.XTilt * (Math.PI / 180), 0, this.LocalTilt * (Math.PI / 180));
-        planet.rotation.set(this.XTilt * (Math.PI / 180), 0, this.SunDeg - (this.LocalTilt * (Math.PI / 180)));
         circum.rotateOnWorldAxis(new THREE.Vector3(0, 0, 1), this.ZTilt * (Math.PI / 180));
-        planet.rotateOnAxis(new THREE.Vector3(0, 0, 1), this.SunDeg - (this.ZTilt * (Math.PI / 180)));
         circum.translateZ(this.XRadius - this.aphelion);
 
         scene.add(circum);
