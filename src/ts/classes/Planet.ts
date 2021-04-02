@@ -86,9 +86,8 @@ export class Planet {
         // Having to calculate points manually as this is a meshline
         var CircumPoints: Array<number> = [];
         for (let i = 0; i <= (GraphicsLevel + 1) * 96; i++) {
-            let x = this.XRadius * 24 * Math.cos((i * 2 * Math.PI) / ((GraphicsLevel + 1) * 12));
-            let y = this.XRadius * 24 * -Math.sin((i * 2*  Math.PI) / ((GraphicsLevel + 1) * 12));
-            CircumPoints.push(x, y, 0);
+            
+            CircumPoints.push();
         }
         CircumGeometry.setPoints(CircumPoints, p => 1 - Math.sqrt(p) * 2.5);
 
