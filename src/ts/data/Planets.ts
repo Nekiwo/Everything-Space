@@ -9,7 +9,7 @@ export var planets:Planet[] = [
         radius: 0.000696340000,
         model: "",
         SunDeg: 0,
-        XRadius: 0,
+        OrbitRadius: 0,
         XTilt: 0,
         ZTilt: 0
     }),

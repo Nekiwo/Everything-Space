@@ -35,23 +35,25 @@ export class Planet {
 
         // Having to calculate points manually as this is a meshline
         var CircumPoints: Array<number> = [];
-        for (let i = 0; i <= (GraphicsLevel + 1) * 12; i++) {
+        for (let i = 0; i <= 360; i += 22.5) {
+            /*
             var CalcOrbit = CalcOrbitPoint({
                 OrbitRadius: this.OrbitRadius,
                 XTilt: this.XTilt,
                 ZTilt: this.ZTilt,
-                NewSunDeg: (i * 2 * Math.PI) / ((GraphicsLevel + 1) * 12)
+                NewSunDeg: i
             });
             let x = CalcOrbit[0];
             let y = CalcOrbit[1];
             let z = CalcOrbit[2];
             CircumPoints.push(x, y, z);
+            console.log(i, x)
             
-            /*
-            let x = this.XRadius * 24 * Math.cos((i * 2 * Math.PI) / ((GraphicsLevel + 1) * 12));
-            let y = this.XRadius * 24 * -Math.sin((i * 2*  Math.PI) / ((GraphicsLevel + 1) * 12));
-            CircumPoints.push(x, y, 0);
             */
+            let x = this.OrbitRadius * 24 * Math.cos(i);
+            let y = this.OrbitRadius * 24 * -Math.sin(i);
+            CircumPoints.push(x, y, 0);
+            console.log(i, this.OrbitRadius * 24, x, y)
         }
         CircumGeometry.setPoints(CircumPoints, p => 1 - Math.sqrt(p) * 1.5);
 

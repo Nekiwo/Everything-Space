@@ -1,11 +1,11 @@
 import {GraphicsLevel} from "../index";
 // Calculate a point of certain angle on an orbit/ellipse using planet data
 export var CalcOrbitPoint: Function = (args: any) => {
-    var PreX = args.OrbitRadius * 24 * Math.cos(args.NewSunDeg + args.ZTilt);
-    var PreY = args.OrbitRadius * 24 * Math.sin(args.NewSunDeg + args.ZTilt);
+    var PreX = args.OrbitRadius * 24 * Math.cos((args.NewSunDeg + args.ZTilt) * (Math.PI / 180));
+    var PreY = args.OrbitRadius * 24 * Math.sin((args.NewSunDeg + args.ZTilt) * (Math.PI / 180));
 
     var x = (Math.sqrt(PreX*PreX + PreY*PreY)) * Math.cos(-args.ZTilt * (Math.PI / 180));
-    var y = (Math.sqrt(PreX*PreX + PreY*PreY)) * Math.sin(-args.ZTilt);
+    var y = (Math.sqrt(PreX*PreX + PreY*PreY)) * Math.sin(-args.ZTilt * (Math.PI / 180));
 
     var XViewXRadius = 0;
     var XViewYRadius = 0;
