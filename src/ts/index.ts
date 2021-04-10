@@ -12,15 +12,14 @@ import {planets} from "./data/Planets";
 
 // Global variables
 
-// Level of graphics from 1-3, changed based on the device's performance
-export var GraphicsLevel: number = 3;
-
 
 // Making a three js scene
 export const scene:THREE.Scene = new THREE.Scene();
 const camera:THREE.PerspectiveCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
-const renderer:THREE.WebGLRenderer = new THREE.WebGLRenderer({antialias: true});
+const renderer:THREE.WebGLRenderer = new THREE.WebGLRenderer({
+    antialias: true
+});
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
@@ -32,7 +31,7 @@ window.addEventListener("resize", () => {
 });
 
 planets.forEach((planet: Planet) => {
-    planet.DrawPlanet(planet.SunDeg, scene);
+    planet.DrawPlanet(planet.PlanetRotation, scene);
 });
 
 const controls: OrbitControls = new OrbitControls(camera, renderer.domElement);
