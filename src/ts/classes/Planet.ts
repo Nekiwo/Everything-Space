@@ -1,6 +1,5 @@
 import * as THREE from "three";
 import {MeshLine, MeshLineMaterial, MeshLineRaycast} from "three.meshline";
-import {GraphicsLevel} from "../index";
 import {CalcOrbitPoint} from "../functions/CalcOrbitPoint";
 
 
@@ -14,7 +13,7 @@ export class Planet {
     name: string;
     radius: number;
     model: string;
-    SunDeg: number;
+    PlanetRotation: number;
     XTilt: number;
     ZTilt: number;
     OrbitRadius: number;
@@ -22,40 +21,32 @@ export class Planet {
         this.name = args.name;
         this.radius = args.radius;
         this.model = args.model;
-        this.SunDeg = args.SunDeg;
+        this.PlanetRotation = args.PlanetRotation; // Planet rotation
         this.OrbitRadius = args.OrbitRadius;
-        this.XTilt = args.XTilt;
-        this.ZTilt = args.ZTilt;
+        this.XTilt = args.XTilt; // X axis tilt of the orbit
+        this.ZTilt = args.ZTilt; // Z axis tilt of the orbit
     }
-    DrawPlanet: Function = (SunDeg: number = this.SunDeg, scene: THREE.Scene) => {
-        this.SunDeg = SunDeg;
+    DrawPlanet: Function = (PlanetRotation: number = this.PlanetRotation, scene: THREE.Scene) => {
+        this.PlanetRotation = PlanetRotation;
 
-        // Testing orbit, better version coming soon
         var CircumGeometry: any = new MeshLine();
 
         // Having to calculate points manually as this is a meshline
         var CircumPoints: Array<number> = [];
-        for (let i = 0; i <= 360; i += 22.5) {
-            /*
+        for (let i = this.PlanetRotation; i <= 360; i += 5.625) {
             var CalcOrbit = CalcOrbitPoint({
                 OrbitRadius: this.OrbitRadius,
                 XTilt: this.XTilt,
                 ZTilt: this.ZTilt,
-                NewSunDeg: i
+                NewPlanetRotation: i
             });
             let x = CalcOrbit[0];
             let y = CalcOrbit[1];
             let z = CalcOrbit[2];
             CircumPoints.push(x, y, z);
-            console.log(i, x)
-            
-            */
-            let x = this.OrbitRadius * 24 * Math.cos(i);
-            let y = this.OrbitRadius * 24 * -Math.sin(i);
-            CircumPoints.push(x, y, 0);
-            console.log(i, this.OrbitRadius * 24, x, y)
+            console.log(x, y, z)
         }
-        CircumGeometry.setPoints(CircumPoints, p => 1 - Math.sqrt(p) * 1.5);
+        CircumGeometry.setPoints(CircumPoints, p => 1 - Math.sqrt(p) * 1.1);
 
         var CircumMaterial: any = new MeshLineMaterial({color: new THREE.Color(0xFFFFFF), sizeAttenuation: false, lineWidth: 0.003});
         var circum: THREE.Mesh = new THREE.Mesh(CircumGeometry, CircumMaterial);
@@ -65,7 +56,18 @@ export class Planet {
         var PlanetMaterial: THREE.MeshBasicMaterial = new THREE.MeshBasicMaterial({color: 0x0000FF, side: THREE.FrontSide});
         var planet: THREE.Mesh = new THREE.Mesh(PlanetGeometry, PlanetMaterial);
 
-        planet.position.set(0, 0, 0);
+        // Position the planets depending on their rotation degree
+        var CalcOrbit = CalcOrbitPoint({
+            OrbitRadius: this.OrbitRadius,
+            XTilt: this.XTilt,
+            ZTilt: this.ZTilt,
+            NewPlanetRotation: this.PlanetRotation
+        });
+        let x = CalcOrbit[0];
+        let y = CalcOrbit[1];
+        let z = CalcOrbit[2];
+
+        planet.position.set(x, y, z);
 
         scene.add(circum);
         scene.add(planet);
