@@ -8,7 +8,7 @@ export var planets:Planet[] = [
         name: "Sun",
         radius: 0.000696340000,
         model: "",
-        SunDeg: 0,
+        PlanetRotation: 0,
         OrbitRadius: 0,
         XTilt: 0,
         ZTilt: 0
@@ -17,7 +17,7 @@ export var planets:Planet[] = [
         name: "Mercury",
         radius: 0.000000002439,
         model: "",
-        SunDeg: 0,
+        PlanetRotation: 0,
         OrbitRadius: 0.115,
         XTilt: 7,
         ZTilt: 77.4
@@ -26,7 +26,7 @@ export var planets:Planet[] = [
         name: "Venus",
         radius: 0.000000006502,
         model: "",
-        SunDeg: 0,
+        PlanetRotation: 0,
         OrbitRadius: 0.216,
         XTilt: 3.4,
         ZTilt: 76.6
@@ -35,7 +35,7 @@ export var planets:Planet[] = [
         name: "Earth",
         radius: 0.000000006378,
         model: "",
-        SunDeg: 0,
+        PlanetRotation: 0,
         OrbitRadius: 0.299,
         XTilt: 0,
         ZTilt: 103
@@ -44,7 +44,7 @@ export var planets:Planet[] = [
         name: "Mars",
         radius: 0.000000003396,
         model: "",
-        SunDeg: 0,
+        PlanetRotation: 0,
         OrbitRadius: 0.455,
         XTilt: 1.9,
         ZTilt: 336
@@ -53,7 +53,7 @@ export var planets:Planet[] = [
         name: "Jupiter",
         radius: 0.000000071492,
         model: "",
-        SunDeg: 0,
+        PlanetRotation: 0,
         OrbitRadius: 1.557,
         XTilt: 1.3,
         ZTilt: 14.2
@@ -62,7 +62,7 @@ export var planets:Planet[] = [
         name: "Saturn",
         radius: 0.000000060268,
         model: "",
-        SunDeg: 0,
+        PlanetRotation: 0,
         OrbitRadius: 2.867,
         XTilt: 2.5,
         ZTilt: 92.9
@@ -71,7 +71,7 @@ export var planets:Planet[] = [
         name: "Uranus",
         radius: 0.000000025559,
         model: "",
-        SunDeg: 0,
+        PlanetRotation: 0,
         OrbitRadius: 5.744,
         XTilt: 0.8,
         ZTilt: 170.9
@@ -80,7 +80,7 @@ export var planets:Planet[] = [
         name: "Neptune",
         radius: 0.000000024764,
         model: "",
-        SunDeg: 0,
+        PlanetRotation: 0,
         OrbitRadius: 8.990,
         XTilt: 1.8,
         ZTilt: 48
