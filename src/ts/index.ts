@@ -2,6 +2,11 @@
 
 // importing classes and etc.
 import * as THREE from "three";
+import {EffectComposer} from "three/examples/jsm/postprocessing/EffectComposer.js";
+import {RenderPass} from "three/examples/jsm/postprocessing/RenderPass.js";
+import {ShaderPass} from "three/examples/jsm/postprocessing/ShaderPass.js";
+import {UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
+import {FXAAShader} from "three/examples/jsm/shaders/FXAAShader.js";
 import {OrbitControls} from "three-orbitcontrols-ts";
 
 import {Planet} from "./classes/Planet";
@@ -9,19 +14,40 @@ import {Planet} from "./classes/Planet";
 import {CalcTime} from "./functions/CalcTime";
 
 import {planets} from "./data/Planets";
+import { Renderer } from "three";
 
 // Global variables
 
 
 // Making a three js scene
-export const scene:THREE.Scene = new THREE.Scene();
-const camera:THREE.PerspectiveCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+export const scene: THREE.Scene = new THREE.Scene();
+const camera: THREE.PerspectiveCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
-const renderer:THREE.WebGLRenderer = new THREE.WebGLRenderer({
+const renderer: THREE.WebGLRenderer = new THREE.WebGLRenderer({
     antialias: true
 });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
+
+// Effects setup
+const RenderScene: RenderPass = new RenderPass(scene, camera);
+
+const FxaaPass: ShaderPass = new ShaderPass(FXAAShader);
+
+const pixelRatio = renderer.getPixelRatio();
+
+FxaaPass.material.uniforms["resolution"].value.x = 1 / (document.body.offsetWidth * pixelRatio);
+FxaaPass.material.uniforms["resolution"].value.y = 1 / (document.body.offsetHeight * pixelRatio);
+
+const BloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85);
+BloomPass.threshold = 0;
+BloomPass.strength = 0.9;
+BloomPass.radius = 0.1;
+
+const composer: EffectComposer = new EffectComposer(renderer);
+composer.addPass(RenderScene);
+composer.addPass(BloomPass);
+composer.addPass(FxaaPass);
 
 // Fix canvas size on window resize
 window.addEventListener("resize", () => {
@@ -62,9 +88,9 @@ const animate = function () {
     requestAnimationFrame(animate);
 
     
-
+    
     controls.update();
-    renderer.render(scene, camera);
+    composer.render();
 };
 
 animate();
