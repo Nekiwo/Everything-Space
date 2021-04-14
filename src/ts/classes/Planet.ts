@@ -44,12 +44,14 @@ export class Planet {
             let y = CalcOrbit[1];
             let z = CalcOrbit[2];
             CircumPoints.push(x, y, z);
-            console.log(x, y, z)
         }
-        CircumGeometry.setPoints(CircumPoints, p => 1 - Math.sqrt(p) * 1.1);
+        CircumGeometry.setPoints(CircumPoints, p => {if (p > 0.05) {return Math.sqrt(p) * 0.3}});
 
-        var CircumMaterial: any = new MeshLineMaterial({color: new THREE.Color(0xFFFFFF), sizeAttenuation: false, lineWidth: 0.003});
+        var CircumMaterial: MeshLineMaterial = new MeshLineMaterial({color: new THREE.Color(0xFFFFFF), sizeAttenuation: false, lineWidth: 0.01});
         var circum: THREE.Mesh = new THREE.Mesh(CircumGeometry, CircumMaterial);
+
+        // Orbit lighting
+        
 
         // Testing Planets, models coming soon
         var PlanetGeometry: THREE.SphereGeometry = new THREE.SphereGeometry(this.radius * 24000000, 20, 16);
