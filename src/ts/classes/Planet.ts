@@ -45,9 +45,14 @@ export class Planet {
             let z = CalcOrbit[2];
             CircumPoints.push(x, y, z);
         }
-        CircumGeometry.setPoints(CircumPoints, p => {if (p > 0.12) {return Math.sqrt(p) * 0.2}});
+        CircumGeometry.setPoints(CircumPoints);
 
-        var CircumMaterial: MeshLineMaterial = new MeshLineMaterial({color: new THREE.Color(0xFFFFFF), sizeAttenuation: false, lineWidth: 0.01});
+        var CircumMaterial: MeshLineMaterial = new MeshLineMaterial({
+            resolution: new THREE.Vector2(window.innerWidth, window.innerHeight),
+            color: new THREE.Color(0x4c5557),
+            sizeAttenuation: false,
+            lineWidth: 5
+        });
         var circum: THREE.Mesh = new THREE.Mesh(CircumGeometry, CircumMaterial);
 
         // Orbit lighting
