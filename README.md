@@ -1,5 +1,5 @@
-# Everything Space!
-A TypeScript project that teaches you everything about space<br/>
+# History Of Space
+Source for my interactive video about space<br/>
 
 ## Important
 Currently this project is not completed, no reason to build yet
