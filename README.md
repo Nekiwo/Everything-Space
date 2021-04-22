@@ -1,5 +1,5 @@
-# History Of Space
-Source for my interactive video about space<br/>
+# The Space Timeline
+Source for my interactive space museum<br/>
 
 ## Important
 Currently this project is not completed, no reason to build yet
