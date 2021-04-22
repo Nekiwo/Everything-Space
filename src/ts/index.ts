@@ -10,11 +10,12 @@ import {FXAAShader} from "three/examples/jsm/shaders/FXAAShader.js";
 import {OrbitControls} from "three-orbitcontrols-ts";
 
 import {Planet} from "./classes/Planet";
+import {Timestamp} from "./classes/Timestamp";
 
 import {CalcTime} from "./functions/CalcTime";
 
 import {planets} from "./data/Planets";
-import { Renderer } from "three";
+import { Renderer, SRGB8_ALPHA8_ASTC_10x10_Format, SRGB8_ALPHA8_ASTC_12x10_Format } from "three";
 
 // Global variables
 
@@ -95,3 +96,7 @@ const animate = function () {
 };
 
 animate();
+
+
+// Timeline slider
+
