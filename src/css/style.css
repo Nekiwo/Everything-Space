@@ -89,7 +89,6 @@
     transform: translateX(-50%);
     font-size: 48px;
     font-weight: 900;
-    color: #ffffff
 }
 #t2 {
     position: fixed;
@@ -99,17 +98,4 @@
     transform: translateX(-50%);
     font-size: 32px;
     font-weight: 900;
-}
-#space {
-    position: fixed;
-    width: 100%;
-    height: 200px;
-    top: 0px;
-    background-color: green;
-}
-#space canvas {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0px;
 }
