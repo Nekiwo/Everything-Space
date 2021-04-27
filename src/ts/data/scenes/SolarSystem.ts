@@ -8,12 +8,8 @@ import {FXAAShader} from "three/examples/jsm/shaders/FXAAShader.js";
 import {OrbitControls} from "three-orbitcontrols-ts";
 
 import {Planet} from "../../classes/Planet";
-import {Timestamp} from "../../classes/Timestamp";
-
-import {CalcTime} from "../../functions/CalcTime";
 
 import {planets} from "../../data/Planets";
-import {Renderer, SRGB8_ALPHA8_ASTC_10x10_Format, SRGB8_ALPHA8_ASTC_12x10_Format} from "three";
 
 // Global variables
 
@@ -49,7 +45,7 @@ composer.addPass(RenderScene);
 composer.addPass(BloomPass);
 composer.addPass(FxaaPass);
 
-// Fix canvas size on window resize
+// Other
 window.addEventListener("resize", () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
