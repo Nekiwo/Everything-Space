@@ -2,6 +2,10 @@
     font-family: 'Roboto', sans-serif;
     color: #283c6b;
 }
+body {
+    margin: 0px;
+    background-color: #262e41;
+}
 
 #screen {
     position: fixed;
@@ -14,13 +18,15 @@
 }
 #wbg {
     position: fixed;
-    height: calc(100% - 320px);
-    width: 100%;
-    bottom: 0px;
+    height: calc(100% - 96px);
+    width: calc(100% - 96px);
+    top: 48px;
+    left: 48px;
+    border-radius: 48px;
     background-color: #ffffff;
 }
 #slider {
-    position: fixed;
+    position: absolute;
     width: 100%;
     height: 320px;
     top: 50%;
@@ -82,7 +88,7 @@
 
 
 #t1 {
-    position: fixed;
+    position: absolute;
     text-align: center;
     top: 48px;
     left: 50%;
@@ -91,7 +97,7 @@
     font-weight: 900;
 }
 #t2 {
-    position: fixed;
+    position: absolute;
     text-align: center;
     bottom: 48px;
     left: 50%;
