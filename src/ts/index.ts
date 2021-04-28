@@ -3,9 +3,14 @@
 import {Timestamp} from "./classes/Timestamp";
 import {Timestamps} from "./data/Timestamps";
 
+// Forced to import functions twice, otherwise its not working
+import {BigBang} from "./data/scenes/BigBang";
+
 Timestamps.forEach(stamp => {
     var group: HTMLElement = document.createElement("div");
-    group.onclick = stamp.start();
+    group.onclick = () => {
+        stamp.start();
+    };
     group.classList.add("TSGroup");
 
     var name: HTMLElement = document.createElement("div");

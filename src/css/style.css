@@ -6,6 +6,9 @@ body {
     margin: 0px;
     background-color: #262e41;
 }
+canvas {
+    z-index: 9998;
+}
 
 #screen {
     position: fixed;

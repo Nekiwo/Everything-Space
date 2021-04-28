@@ -1,5 +1,3 @@
-import * as THREE from "three";
-
 // Timestampcene class for each timestamp
 export class Timestamp {
     name: string;
