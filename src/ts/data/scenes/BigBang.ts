@@ -6,6 +6,8 @@ import {UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPas
 import {FXAAShader} from "three/examples/jsm/shaders/FXAAShader.js";
 import {OrbitControls} from "three-orbitcontrols-ts";
 
+import {NextButton} from "../../classes/NextButton";
+
 
 // Big Bang scene
 export var BigBang: Function = () => {
@@ -53,12 +55,19 @@ export var BigBang: Function = () => {
     const controls: OrbitControls = new OrbitControls(camera, renderer.domElement);
     camera.position.set(0, 0, 0);
     controls.update();
+
+    const geometry = new THREE.BoxGeometry();
+	const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+	const cube = new THREE.Mesh( geometry, material );
+	scene.add( cube );
+	camera.position.z = 5;
     
     // Running every frame, standard three.js/ts
     const animate = function () {
         requestAnimationFrame(animate);
     
-        
+        cube.rotation.x += 0.01;
+		cube.rotation.y += 0.01;
         
         controls.update();
         composer.render();
