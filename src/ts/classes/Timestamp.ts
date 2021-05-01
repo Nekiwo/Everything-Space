@@ -2,9 +2,7 @@
 export class Timestamp {
     name: string;
     year: number;
-    start: Function = async (): Promise<void> => {
-        Promise.resolve("test")
-    };
+    start: Function;
     order: number;
     constructor(args?: any) {
         this.name = args.name;
