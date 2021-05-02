@@ -56,11 +56,37 @@ export var BigBang: Function = () => {
     camera.position.set(0, 0, 0);
     controls.update();
 
+    
+    // Initialize all static scenes in different places (dynamic objects initialized later)
+
+    // Scene one: emptiness
     const geometry = new THREE.BoxGeometry();
-	const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-	const cube = new THREE.Mesh( geometry, material );
-	scene.add( cube );
-	camera.position.z = 5;
+    const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+    const cube = new THREE.Mesh( geometry, material );
+    scene.add(cube);
+
+    // All scenes contained in a function array
+    // Controlled by the next button
+    // (Initializing all dynamic parts here)
+    var NB = new NextButton([
+        () => {
+            // Scene one: emptiness
+            camera.position.set(0, 0, 0);
+            controls.update();
+
+            document.getElementById("subtitle").innerHTML = "test1";
+        },
+        () => {
+            document.getElementById("subtitle").innerHTML = "test2";
+        },
+        () => {
+            document.getElementById("subtitle").innerHTML = "test3";
+        },
+        () => {
+            // End screen here
+            location.reload();
+        }
+    ])
     
     // Running every frame, standard three.js/ts
     const animate = function () {
