@@ -7,7 +7,7 @@ body {
     background-color: #262e41;
 }
 canvas {
-    z-index: 9998;
+    z-index: 2;
 }
 
 #screen {
@@ -17,7 +17,7 @@ canvas {
     background-color: #000000;
     opacity: 0;
     pointer-events: none;
-    z-index: 9999;
+    z-index: 4;
 }
 #wbg {
     position: fixed;
@@ -107,4 +107,24 @@ canvas {
     transform: translateX(-50%);
     font-size: 32px;
     font-weight: 900;
+}
+
+#nextbtn {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    color: #ffffff;
+    padding: 16px;
+    font-size: 32px;
+    font-weight: 900;
+    background-color: #283c6b;
+    border-radius: 16px;
+    cursor: pointer;
+    z-index: 3;
+}
+#subtitle {
+    position: fixed;
+    bottom: 32px;
+    left: 32px;
+    color: #ffffff;
 }
