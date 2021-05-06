@@ -6,6 +6,8 @@ import {UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPas
 import {FXAAShader} from "three/examples/jsm/shaders/FXAAShader.js";
 import {OrbitControls} from "three-orbitcontrols-ts";
 
+import * as shaders from "../../../shaders/dist/shaders";
+
 import {NextButton} from "../../classes/NextButton";
 
 
@@ -74,8 +76,8 @@ export var BigBang: Function = () => {
                 value: 0
             }
           },
-        vertexShader: document.getElementById("dynamicblob-vert").textContent,
-        fragmentShader: document.getElementById("dynamicblob-frag").textContent
+        vertexShader: shaders.DynamicBlob_vert,
+        fragmentShader: shaders.DynamicBlob_frag
     });
     const superforce = new THREE.Mesh(SFGeometry, SFMaterial);
     superforce.position.set(0, 0, 0);
