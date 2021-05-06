@@ -6,9 +6,11 @@ import {UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPas
 import {FXAAShader} from "three/examples/jsm/shaders/FXAAShader.js";
 import {OrbitControls} from "three-orbitcontrols-ts";
 
-import * as shaders from "../../../shaders/dist/shaders";
+import * as shaders from "../../../shaders/dist/DynamicBlob";
 
 import {NextButton} from "../../classes/NextButton";
+
+import {english} from "../i18n/english";
 
 
 // Big Bang scene
@@ -55,13 +57,21 @@ export var BigBang: Function = () => {
     });
     
     const controls: OrbitControls = new OrbitControls(camera, renderer.domElement);
+    controls.autoRotate = true;
     camera.position.set(0, 0, 0);
     controls.update();
 
-    
-    // Initialize all static scenes in different places (dynamic objects initialized later)
+    // Initialize all static parts in different places (dynamic objects initialized later)
 
-    // Scene two: emptiness
+
+    // Part one: void(the barrier between part 1 and 2)
+    const BarrierGeometry: THREE.BoxGeometry = new THREE.BoxGeometry(20, 20, 1);
+    const BarrierMaterial: THREE.MeshBasicMaterial = new THREE.MeshBasicMaterial({color: 0x000000});
+    const barrier: THREE.Mesh = new THREE.Mesh(BarrierGeometry, BarrierMaterial);
+    barrier.position.set(0, 0, 20);
+    scene.add(barrier);
+
+    // Part two: superforce
     const SFGeometry: THREE.SphereGeometry = new THREE.SphereGeometry(1, 40, 32);
     const SFMaterial: THREE.ShaderMaterial = new THREE.ShaderMaterial({
         uniforms: {
@@ -82,29 +92,62 @@ export var BigBang: Function = () => {
     const superforce = new THREE.Mesh(SFGeometry, SFMaterial);
     superforce.position.set(0, 0, 0);
     scene.add(superforce);
-    console.log(superforce);
 
-    // All scenes contained in a function array
+    // Part three: start of the expansion
+
+
+    // Part four: first atoms
+
+
+    // Part five: further expansion and first stars
+
+
+    // Part six: the current universe and background radioation
+
+
+    
+    // All parts contained in a function array
     // Controlled by the next button
     // (Initializing all dynamic parts here)
     var NB = new NextButton([
         () => {
-            // Scene one: emptiness
+            // Part one: void
+            document.getElementById("subtitle").innerHTML = english.subs.BigBang.parts[1];
 
-            document.getElementById("subtitle").innerHTML = "test1";
+            camera.position.set(0, 0, 100);
+            controls.target.set(0, 0, 100);
+            controls.update();
+        },
+        () => {
+            // Part two: superforce
+            document.getElementById("subtitle").innerHTML = english.subs.BigBang.parts[2];
 
             camera.position.set(0, 0, 10);
+            controls.target.set(0, 0, 0);
             controls.update();
         },
         () => {
-            // Scene two: superforce
+            // Part three: start of the expansion
+            document.getElementById("subtitle").innerHTML = english.subs.BigBang.parts[3];
 
-            document.getElementById("subtitle").innerHTML = "test1";
-
-            camera.position.set(0, 0, 0);
-            controls.update();
+            
         },
         () => {
+            // Part four: first atoms
+            document.getElementById("subtitle").innerHTML = english.subs.BigBang.parts[4];
+
+            
+        },
+        () => {
+            // Part five: further expansion and first stars
+            document.getElementById("subtitle").innerHTML = english.subs.BigBang.parts[5];
+
+            
+        },
+        () => {
+            // Part six: the current universe and background radioation
+            document.getElementById("subtitle").innerHTML = english.subs.BigBang.parts[6];
+
             
         },
         () => {
