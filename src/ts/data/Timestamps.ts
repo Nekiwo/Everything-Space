@@ -14,7 +14,7 @@ export var Timestamps: Timestamp[] = [
             setTimeout(() => {
                 document.getElementById("wbg").innerHTML = "";
                 document.getElementById("wbg").style.display = "none";
-                FadeTransition(false, 3000);
+                FadeTransition(false, 1000);
             }, 1000);
             BigBang();
         },
