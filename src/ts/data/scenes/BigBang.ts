@@ -7,10 +7,9 @@ import {FXAAShader} from "three/examples/jsm/shaders/FXAAShader.js";
 import {OrbitControls} from "three-orbitcontrols-ts";
 
 import * as shaders from "../../../shaders/dist/DynamicBlob";
-
 import {NextButton} from "../../classes/NextButton";
-
 import {english} from "../i18n/english";
+import {FadeTransition} from "../../functions/fx/FadeTransition";
 
 
 // Big Bang scene
@@ -64,12 +63,18 @@ export var BigBang: Function = () => {
     // Initialize all static parts in different places (dynamic objects initialized later)
 
 
-    // Part one: void(the barrier between part 1 and 2)
-    const BarrierGeometry: THREE.BoxGeometry = new THREE.BoxGeometry(20, 20, 1);
-    const BarrierMaterial: THREE.MeshBasicMaterial = new THREE.MeshBasicMaterial({color: 0x000000});
-    const barrier: THREE.Mesh = new THREE.Mesh(BarrierGeometry, BarrierMaterial);
-    barrier.position.set(0, 0, 20);
-    scene.add(barrier);
+    // Part one: void(all the barriers between parts)
+    const Barrier1Geometry: THREE.BoxGeometry = new THREE.BoxGeometry(20, 20, 1);
+    const Barrier1Material: THREE.MeshBasicMaterial = new THREE.MeshBasicMaterial({color: 0x000000});
+    const barrier1: THREE.Mesh = new THREE.Mesh(Barrier1Geometry, Barrier1Material);
+    barrier1.position.set(0, 0, 20);
+    scene.add(barrier1);
+
+    const Barrier2Geometry: THREE.BoxGeometry = new THREE.BoxGeometry(1, 20, 20);
+    const Barrier2Material: THREE.MeshBasicMaterial = new THREE.MeshBasicMaterial({color: 0xff0000});
+    const barrier2: THREE.Mesh = new THREE.Mesh(Barrier2Geometry, Barrier2Material);
+    barrier2.position.set(20, 0, 0);
+    scene.add(barrier2);
 
     // Part two: superforce
     const SFGeometry: THREE.SphereGeometry = new THREE.SphereGeometry(1, 40, 32);
@@ -129,14 +134,30 @@ export var BigBang: Function = () => {
         () => {
             // Part three: start of the expansion
             document.getElementById("subtitle").innerHTML = english.subs.BigBang.parts[3];
-
             
+            // White screen transition
+            document.getElementById("screen").style.backgroundColor = "#ffffff";
+            FadeTransition(true, 1000);
+            let i = 10;
+            let int = setInterval(() => {
+                if (i > 1) {
+                    camera.position.set(0, 0, i);
+                    i -= 0.1;
+                } else {
+                    clearInterval(int);
+                }
+            }, 15);
         },
         () => {
             // Part four: first atoms
             document.getElementById("subtitle").innerHTML = english.subs.BigBang.parts[4];
 
-            
+            // Clear off last transition
+            document.getElementById("screen").style.opacity = "0";
+            document.getElementById("screen").style.backgroundColor = "#000000";
+
+            camera.position.set(100, 0, 0);
+            controls.target.set(100, 0, 0);
         },
         () => {
             // Part five: further expansion and first stars
