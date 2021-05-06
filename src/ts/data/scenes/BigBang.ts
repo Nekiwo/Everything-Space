@@ -59,11 +59,28 @@ export var BigBang: Function = () => {
     
     // Initialize all static scenes in different places (dynamic objects initialized later)
 
-    // Scene one: emptiness
-    const geometry = new THREE.BoxGeometry();
-    const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-    const cube = new THREE.Mesh( geometry, material );
-    scene.add(cube);
+    // Scene two: emptiness
+    const SFGeometry: THREE.SphereGeometry = new THREE.SphereGeometry(1, 40, 32);
+    const SFMaterial: THREE.ShaderMaterial = new THREE.ShaderMaterial({
+        uniforms: {
+            img: {
+                // @ts-ignore
+                type: "t",
+                value: new THREE.TextureLoader().load("/superforce.png")
+            },
+            time: {
+                // @ts-ignore
+                type: "f",
+                value: 0
+            }
+          },
+        vertexShader: document.getElementById("dynamicblob-vert").textContent,
+        fragmentShader: document.getElementById("dynamicblob-frag").textContent
+    });
+    const superforce = new THREE.Mesh(SFGeometry, SFMaterial);
+    superforce.position.set(0, 0, 0);
+    scene.add(superforce);
+    console.log(superforce);
 
     // All scenes contained in a function array
     // Controlled by the next button
@@ -71,16 +88,22 @@ export var BigBang: Function = () => {
     var NB = new NextButton([
         () => {
             // Scene one: emptiness
-            camera.position.set(0, 0, 0);
-            controls.update();
 
             document.getElementById("subtitle").innerHTML = "test1";
+
+            camera.position.set(0, 0, 10);
+            controls.update();
         },
         () => {
-            document.getElementById("subtitle").innerHTML = "test2";
+            // Scene two: superforce
+
+            document.getElementById("subtitle").innerHTML = "test1";
+
+            camera.position.set(0, 0, 0);
+            controls.update();
         },
         () => {
-            document.getElementById("subtitle").innerHTML = "test3";
+            
         },
         () => {
             // End screen here
@@ -89,11 +112,13 @@ export var BigBang: Function = () => {
     ])
     
     // Running every frame, standard three.js/ts
+
+    const start = Date.now();
     const animate = function () {
         requestAnimationFrame(animate);
     
-        cube.rotation.x += 0.01;
-		cube.rotation.y += 0.01;
+        // Dynamic blob shader
+        SFMaterial.uniforms["time"].value = 0.00025 * (Date.now() - start);
         
         controls.update();
         composer.render();
