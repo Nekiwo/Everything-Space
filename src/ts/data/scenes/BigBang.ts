@@ -5,6 +5,7 @@ import {ShaderPass} from "three/examples/jsm/postprocessing/ShaderPass.js";
 import {UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
 import {FXAAShader} from "three/examples/jsm/shaders/FXAAShader.js";
 import {OrbitControls} from "three-orbitcontrols-ts";
+import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader.js";
 
 import * as shaders from "../../../shaders/dist/DynamicBlob";
 import {NextButton} from "../../classes/NextButton";
@@ -100,10 +101,33 @@ export var BigBang: Function = () => {
     
 
     // Part four: first atoms
-    const NucleusGeometry: THREE.BufferGeometry = new THREE.BufferGeometry();
-    const NucleusMaterial: THREE.MeshBasicMaterial = new THREE.MeshBasicMaterial();
-    const nucleus: THREE.Mesh = new THREE.Mesh(NucleusGeometry, NucleusMaterial);
-    scene.add(nucleus);
+    const NucleusLoader: GLTFLoader = new GLTFLoader();
+
+    NucleusLoader.load("proton.glb", (NucleusGLTF) => {
+        const nucleus: THREE.Group = NucleusGLTF.scene;
+        nucleus.position.set(100, 0, 0);
+        scene.add(nucleus);
+
+        // Lights
+        const NucleusAmbientLight: THREE.AmbientLight = new THREE.AmbientLight(0xababab);
+        scene.add(NucleusAmbientLight);
+
+        const NucleusSpotlight: THREE.SpotLight = new THREE.SpotLight(0x3b3b3b);
+        NucleusSpotlight.position.set(110, 10, 0);
+        NucleusSpotlight.target = nucleus;
+
+        NucleusSpotlight.intensity = 0.8;
+        NucleusSpotlight.castShadow = true;
+        NucleusSpotlight.shadow.mapSize.width = 1024;
+        NucleusSpotlight.shadow.mapSize.height = 1024;
+        NucleusSpotlight.shadow.camera.near = 500;
+        NucleusSpotlight.shadow.camera.far = 4000;
+        NucleusSpotlight.shadow.camera.fov = 30;
+
+        scene.add(NucleusSpotlight);
+
+    }, undefined, (error) => console.log)
+
 
 
     // Part five: further expansion and first stars
