@@ -12,7 +12,7 @@
     },
     "scripts": {
         "start": "node testserver.js",
-        "build": "npx webpack && copyfiles -f src/index.html src/img/*.svg src/img/*.png src/css/style.css build && npm run start"
+        "build": "npx webpack && copyfiles -f src/index.html src/img/*.svg src/img/*.png src/css/*.css src/obj/temp/*.glb build && npm run start"
     },
     "dependencies": {
         "@types/node": "^14.14.41",
