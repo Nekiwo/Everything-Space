@@ -63,7 +63,7 @@ export var BigBang: Function = () => {
     // Initialize all static parts in different places (dynamic objects initialized later)
 
 
-    // Part one: void(all the barriers between parts)
+    // All the barriers between parts
     const Barrier1Geometry: THREE.BoxGeometry = new THREE.BoxGeometry(20, 20, 1);
     const Barrier1Material: THREE.MeshBasicMaterial = new THREE.MeshBasicMaterial({color: 0x000000});
     const barrier1: THREE.Mesh = new THREE.Mesh(Barrier1Geometry, Barrier1Material);
@@ -97,11 +97,13 @@ export var BigBang: Function = () => {
     const superforce = new THREE.Mesh(SFGeometry, SFMaterial);
     superforce.position.set(0, 0, 0);
     scene.add(superforce);
-
-    // Part three: start of the expansion
-
+    
 
     // Part four: first atoms
+    const NucleusGeometry: THREE.BufferGeometry = new THREE.BufferGeometry();
+    const NucleusMaterial: THREE.MeshBasicMaterial = new THREE.MeshBasicMaterial();
+    const nucleus: THREE.Mesh = new THREE.Mesh(NucleusGeometry, NucleusMaterial);
+    scene.add(nucleus);
 
 
     // Part five: further expansion and first stars
@@ -117,7 +119,7 @@ export var BigBang: Function = () => {
     var NB = new NextButton([
         () => {
             // Part one: void
-            document.getElementById("subtitle").innerHTML = english.subs.BigBang.parts[1];
+            document.getElementById("subtitle").innerHTML = english.subs.BigBang.parts[1].content;
 
             camera.position.set(0, 0, 100);
             controls.target.set(0, 0, 100);
@@ -125,7 +127,7 @@ export var BigBang: Function = () => {
         },
         () => {
             // Part two: superforce
-            document.getElementById("subtitle").innerHTML = english.subs.BigBang.parts[2];
+            document.getElementById("subtitle").innerHTML = english.subs.BigBang.parts[2].content;
 
             camera.position.set(0, 0, 10);
             controls.target.set(0, 0, 0);
@@ -133,7 +135,7 @@ export var BigBang: Function = () => {
         },
         () => {
             // Part three: start of the expansion
-            document.getElementById("subtitle").innerHTML = english.subs.BigBang.parts[3];
+            document.getElementById("subtitle").innerHTML = english.subs.BigBang.parts[3].content;
             
             // White screen transition
             document.getElementById("screen").style.backgroundColor = "#ffffff";
@@ -150,24 +152,25 @@ export var BigBang: Function = () => {
         },
         () => {
             // Part four: first atoms
-            document.getElementById("subtitle").innerHTML = english.subs.BigBang.parts[4];
+            document.getElementById("subtitle").innerHTML = english.subs.BigBang.parts[4].content;
 
             // Clear off last transition
             document.getElementById("screen").style.opacity = "0";
             document.getElementById("screen").style.backgroundColor = "#000000";
 
-            camera.position.set(100, 0, 0);
+            camera.position.set(110, 0, 0);
             controls.target.set(100, 0, 0);
+            controls.update();
         },
         () => {
             // Part five: further expansion and first stars
-            document.getElementById("subtitle").innerHTML = english.subs.BigBang.parts[5];
+            document.getElementById("subtitle").innerHTML = english.subs.BigBang.parts[5].content;
 
             
         },
         () => {
             // Part six: the current universe and background radioation
-            document.getElementById("subtitle").innerHTML = english.subs.BigBang.parts[6];
+            document.getElementById("subtitle").innerHTML = english.subs.BigBang.parts[6].content;
 
             
         },
