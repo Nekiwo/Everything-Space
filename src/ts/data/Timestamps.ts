@@ -2,6 +2,7 @@ import {FadeTransition} from "../functions/fx/FadeTransition";
 
 // Forced to import functions twice, otherwise its not working
 import {BigBang} from "./scenes/BigBang";
+//
 
 // All timestamps
 import {Timestamp} from "../classes/Timestamp";
@@ -19,5 +20,19 @@ export var Timestamps: Timestamp[] = [
             BigBang();
         },
         order: 0
+    }),
+    new Timestamp({
+        name: "",
+        year: "",
+        start: () => {
+            FadeTransition(true, 1000);
+            setTimeout(() => {
+                document.getElementById("wbg").innerHTML = "";
+                document.getElementById("wbg").style.display = "none";
+                FadeTransition(false, 1000);
+            }, 1000);
+            //
+        },
+        order: 1
     })
 ];
